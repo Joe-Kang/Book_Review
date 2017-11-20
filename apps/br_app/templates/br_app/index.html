@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Welcome</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>Welcome!</h1>
+    <p>This site is used to review books!</p>
+    {% if messages %}
+    <div class="messages col-5">
+        {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <h1>Register</h1>
+    <div class="form-group col-8">
+        <form action="/register" method="post">{% csrf_token %}
+            <label for="fname">First Name:</label>
+            <input type="text" class="form-control" name="fname">
+            <label for="lname">Last Name:</label>
+            <input type="text" class="form-control" name="lname">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" name="email">
+            <label for="bday">Birthday:</label>
+            <input type="date" class="form-control" name="bday">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" name="password">
+            <label for="pw_confirm">Confirm Password:</label>
+            <input type="password" class="form-control" name="pw_confirm">
+            <input type="submit" class="btn btn-primary" value="Register">
+        </form>
+    </div>
+
+    <h1>Login</h1>
+    <div class="form-group col-8">
+        <form action="/login" method="post">{% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" name="email">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" name="password">
+            <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

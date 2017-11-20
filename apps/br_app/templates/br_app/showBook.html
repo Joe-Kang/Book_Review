@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Book</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row">
+        <h1 class="col-4">Welcome {{user.first_name}} {{user.last_name}}</h1>
+        <form action="/bookHome" class="offset-2" method="post">{% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Home">
+        </form>
+        <form action="/logout" class="offset-1" method="post">{% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Log Out">
+        </form>
+    </div>
+<hr>
+    <h1> Book: {{book.title}} </h1>
+    <h2> Author: {{book.author}}</h2>
+
+    <h3>Reviews:</h3>
+    <hr>
+    {% for review in book.reviews.all %}
+    <h4>Rating: {{review.rating}}</h4>
+    <h4>
+        <a href="/user/{{review.reviewer.id}}">{{review.reviewer.first_name}}</a> says: {{review.review}}</h4>
+    <h4>Posted on {{review.created_at}}</h4>
+    {% endfor %%}
+
+    <a href="/delete/{{book.id}}">Delete Review</a>
+
+
+    <h3>Add a Review</h3>
+    <div class="col-5">
+        <form action="/addBook" method="post">{% csrf_token %}
+            <label for="review">Review:</label>
+            <textarea class="form-control" name="review" rows="3"></textarea>
+            <label for="rating">Rating:</label>
+            <select class="form-control col-1" name="rating">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+            </select>
+            <input type="hidden" name="title" value="{{book.title}}">
+            <input type="hidden" name="existing_author" value="{{book.author}}">
+            <input type="hidden" name="new_author" value="">
+            <input type="hidden" name="addReview" value="1">
+            <input type="hidden" name="bookID" value="{{book.id}}">
+            <input type="submit" class="btn btn-primary" value="Submit Review">
+        </form>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
